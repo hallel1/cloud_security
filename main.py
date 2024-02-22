@@ -1,17 +1,17 @@
 from github import Github
-import github_config
 from github.Branch import Branch
+import os
 
 
 def main():
     repo_name ="hallel1/learn-kafka"
     branch_name = "main"
 
-    g = Github(github_config.GITHUB_TOKEN)
-    repo = g.get_repo(repo_name)
+    github = Github(os.getenv('GITHUB_TOKEN'))
+    repo = github.get_repo(repo_name)
     branch = repo.get_branch(branch_name)
 
-    branch_protection(branch)
+    check_branch_protection(branch, create_branch_protection)
 
 
 def branch_protection(branch: Branch) -> None:
