@@ -5,6 +5,7 @@ from github import Github
 import config
 from branch_protection import create_branch_protection, check_branch_protection
 from vulnerability_alerts import get_vulnerability_alerts
+from scanning_for_secrets import scan_contents
 
 
 def main():
@@ -15,6 +16,7 @@ def main():
     branch = repo.get_branch(config.BRANCH_NAME)
 
     check_branch_protection(branch, create_branch_protection)
+    scan_contents(repo)
     get_vulnerability_alerts()
     github.close()
 
