@@ -4,6 +4,7 @@ from github.Branch import Branch
 def check_branch_protection(branch: Branch, create_branch_protection):
     try:
         protection = branch.get_protection()
+        print("branch protection exists\n")
         print_branch_protection_status(protection)
     except Exception as e:
         if e.status == 404:
@@ -15,7 +16,6 @@ def check_branch_protection(branch: Branch, create_branch_protection):
 
 
 def print_branch_protection_status(protection):
-    print("Branch protection settings:")
     print(f"Required status checks: {protection.required_status_checks}")
     print(f"Enforce admins: {protection.enforce_admins}")
     print(f"Required pull request reviews: {protection.required_pull_request_reviews}\n\n")
